@@ -2,8 +2,8 @@ import type { MobileMoneyProvider, PaymentRequest, PaymentResponse, BalanceRespo
 import type { MpambaConfig } from "../../../config";
 import { DEFAULTS } from "../../../config";
 import { AirtimePayError, providerError } from "../../../middlewares/errors";
-import { withRetry } from "../../../middlewares/reply";
-import { logger } from "../../../middlewares/loggers";
+import { withRetry } from "../../../middlewares/retry";
+import { logger } from "../../../middlewares/logger";
 import { normalizePhone } from "../../../utils/phone";
 import { assertPositiveAmount } from "../../../utils/money";
 import { now } from "../../../utils/idGenerator";
@@ -123,7 +123,8 @@ export class MpambaProvider implements MobileMoneyProvider {
         signal: controller.signal,
       });
 
-      const data = await res.json().catch(() => ({}));
+      const data: any = await res.json().catch(() => ({}));
+
 
       if (!res.ok) {
         providerError(
@@ -141,7 +142,8 @@ export class MpambaProvider implements MobileMoneyProvider {
       if ((err as Error).name === "AbortError") {
         providerError(this.name, "TIMEOUT", "Mpamba API request timed out", 408);
       }
-      providerError(this.name, "NETWORK_ERROR", (err as Error).message, 503, err);
+    const message = err instanceof Error ? err.message : "Unknown network error";
+    providerError(this.name, "NETWORK_ERROR", message, 503, err);
     } finally {
       clearTimeout(timer);
     }
