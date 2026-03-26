@@ -1,0 +1,40 @@
+{
+  "name": "airtime-pay",
+  "version": "1.0.0",
+  "description": "Unified TypeScript SDK for Airtel Money and TNM Mpamba — payments, balance, transaction status and webhooks via one interface.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run lint && npm test && npm run build"
+  },
+  "keywords": [
+    "airtel-money", "mpamba", "tnm", "malawi", "mobile-money",
+    "mwk", "payments", "fintech", "typescript", "sdk"
+  ],
+  "author": {
+    "name": "Prince Thawani",
+    "email": "princethawani4@gmail.com",
+    "url": "https://princethawani.com/"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/princethawani/airtime-pay.git"
+  },
+  "homepage": "https://github.com/princethawani/airtime-pay#readme",
+  "bugs": {
+    "url": "https://github.com/princethawani/airtime-pay/issues",
+    "email": "princethawani4@gmail.com"
+  },
+  "engines": { "node": ">=18.0.0" },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^2.0.0"
+  }
+}
