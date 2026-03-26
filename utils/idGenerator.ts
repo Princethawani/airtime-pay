@@ -1,29 +1,19 @@
-/**
- * Formats an MKW amount in tambala (smallest unit) to a human-readable string.
- * 250000 tambala → "MK 2,500.00"
- */
-export function formatMKW(tambala: number): string {
-  const kwacha = tambala / 100;
-  return `MK ${kwacha.toLocaleString("en-MW", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  })}`;
+let _counter = 0;
+
+export function generateRef(prefix = "ref"): string {
+  _counter += 1;
+  const rand = Math.random().toString(36).slice(2, 8).toUpperCase();
+  return `${prefix.toUpperCase()}-${rand}-${_counter}`;
 }
 
-/** Convert kwacha float → tambala integer (safe) */
-export function toTambala(kwacha: number): number {
-  return Math.round(kwacha * 100);
+export function generateTxId(): string {
+  return generateRef("TX");
 }
 
-/** Convert tambala → kwacha float */
-export function toKwacha(tambala: number): number {
-  return tambala / 100;
+export function now(): number {
+  return Math.floor(Date.now() / 1000);
 }
 
-export function assertPositiveAmount(amount: number, provider: string): void {
-  if (!Number.isInteger(amount) || amount <= 0) {
-    throw new Error(
-      `[${provider}] Amount must be a positive integer in tambala. Got: ${amount}`
-    );
-  }
+export function resetCounter(): void {
+  _counter = 0;
 }
