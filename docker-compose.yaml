@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+
+  # Run tests once (CI-friendly)
+  test:
+    build:
+      context: .
+      target: test
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm test
+    environment:
+      - NODE_ENV=test
+
+  # Watch mode for local development
+  dev:
+    build:
+      context: .
+      target: test
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run test:watch
+    environment:
+      - NODE_ENV=development
+    stdin_open: true
+    tty: true
+
+  # Production build (useful for integration testing your app against the SDK)
+  prod:
+    build:
+      context: .
+      target: production
+    environment:
+      - NODE_ENV=production
+      - AIRTEL_CLIENT_ID=${AIRTEL_CLIENT_ID}
+      - AIRTEL_CLIENT_SECRET=${AIRTEL_CLIENT_SECRET}
+      - MPAMBA_API_KEY=${MPAMBA_API_KEY}
