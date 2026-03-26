@@ -2,8 +2,8 @@ import type { MobileMoneyProvider, PaymentRequest, PaymentResponse, BalanceRespo
 import type { MpambaConfig } from "../../../config";
 import { DEFAULTS } from "../../../config";
 import { AirtimePayError, providerError } from "../../../middlewares/errors";
-import { withRetry } from "../../../middlewares/retry";
-import { logger } from "../../../middlewares/logger";
+import { withRetry } from "../../../middlewares/reply";
+import { logger } from "../../../middlewares/loggers";
 import { normalizePhone } from "../../../utils/phone";
 import { assertPositiveAmount } from "../../../utils/money";
 import { now } from "../../../utils/idGenerator";
