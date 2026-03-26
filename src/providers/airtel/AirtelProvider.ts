@@ -1,9 +1,9 @@
 import type { MobileMoneyProvider, PaymentRequest, PaymentResponse, BalanceResponse, TransactionStatusResponse, RefundRequest, RefundResponse } from "../../payments/interface/types";
 import type { AirtelConfig } from "../../../config";
 import { DEFAULTS } from "../../../config";
-import { AirtimePayError, providerError } from "../../../middleware/errors";
-import { withRetry } from "../../../middleware/reply";
-import { logger } from "../../../middleware/loggers";
+import { AirtimePayError, providerError } from "../../../middlewares/errors";
+import { withRetry } from "../../../middlewares/reply";
+import { logger } from "../../../middlewares/loggers";
 import { normalizePhone } from "../../../utils/phone";
 import { assertPositiveAmount } from "../../../utils/money";
 import { now } from "../../../utils/idGenerator";
