@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+*.tgz
+.git
+.gitignore
+coverage
+.nyc_output
